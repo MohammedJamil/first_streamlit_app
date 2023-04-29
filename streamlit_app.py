@@ -36,8 +36,10 @@ my_cur.execute("select * from FRUIT_LOAD_LIST")
 my_data_rows = my_cur.fetchall()
 streamlit.header("The fruit load list contains:")
 streamlit.dataframe(my_data_rows)
-fruit_to_add = streamlit.text_input("Wanna add a fruit ?")
-if fruit_to_add != '' and fruit_to_add != None :
-  my_data_rows.append((f"{fruit_to_add}",))
-  # my_cur.execute(f"insert into FRUIT_LOAD_LIST values ('{fruit_to_add}')")
-  streamlit.write('thanks for adding :', fruit_to_add)
+
+fruit_to_add = streamlit.text_input("Wanna add a fruit ?", onchange=on_input_change)
+def on_input_change() :
+  if fruit_to_add != '' and fruit_to_add != None :
+    my_data_rows.append((f"{fruit_to_add}",))
+    # my_cur.execute(f"insert into FRUIT_LOAD_LIST values ('{fruit_to_add}')")
+    streamlit.write('thanks for adding :', fruit_to_add)
